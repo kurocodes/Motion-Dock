@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# 🚀 MotionDock — Interactive Proximity Dock
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully animated, proximity-based dock component for React, powered by Framer Motion, TypeScript, and Tailwind CSS. Each item grows, lifts, and reacts to your mouse position with smooth cosine-based scaling — just like the iconic macOS dock, but fully customizable and reusable across your apps.
 
-Currently, two official plugins are available:
+## ✨ Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `React`
+- `TypeScript`
+- `Framer Motion`
+- `Tailwind CSS`
+- `Vite`
 
-## React Compiler
+## 🔮 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Proximity-based scaling powered by cosine falloff
+- Dynamic width & layout updates with ResizeObserver
+- Fluid spring animations for natural movement
+- Customizable sizing, lift, falloff, and spacing
+- Works with any content — icons, images, cards, buttons, etc.
+- Reusable component structure with TypeScript interfaces
+- Zero re-renders during mouse movement (MotionValues)
 
-## Expanding the ESLint configuration
+## 🧩 Why I Built This
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+I always loved the way the macOS dock feels — smooth, interactive, alive.
+But most versions online are either too rigid, too janky, or hard to reuse.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+So I decided to make my own:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Started with a simple layout
+- Added MotionValues to track mouse position globally
+- Calculated proximity using a cosine falloff curve
+- Interpolated item size dynamically
+- Used real width/height animations instead of scale() to avoid overlap
+- Added ResizeObserver to update dock width in real time
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The result is a snappy, responsive dock that feels good to play with — whether you drop in gradient cards, social media icons, or your own components.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚙️ How It Works (high-level)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- The MouseProvider tracks global mouse X using Framer Motion.
+- Dock measures its width to calculate relative distances.
+- Each DockItem:
+  - Computes its center X
+  - Calculates how close the mouse is
+  - Applies cosine(angle) ** falloff to create the Mac-style scaling curve
+  - Animates width/height and vertical lift with springs
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This ensures smooth, predictable interactions no matter the number of items.
+
+## 🚦 Running the Project
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start development server: `npm run dev`
+4. Open your browser at: `http://localhost:5173`
+
+## 🎥 Preview
+
+
+
+https://github.com/user-attachments/assets/f557f35f-5c9f-440c-9a9d-7e99b21b49cf
+
